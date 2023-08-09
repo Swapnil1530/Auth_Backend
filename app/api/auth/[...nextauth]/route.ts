@@ -2,9 +2,15 @@ import { db } from "@/lib";
 import { compare } from "bcrypt";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github"
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
+     GithubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+     }),
     CredentialsProvider({
       credentials: {
         email: { label: "Email", type: "text", placeholder: "Email" },
